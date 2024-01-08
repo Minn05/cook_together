@@ -1,0 +1,54 @@
+name: recipes
+description: 'Cook Together'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+dependencies:
+  cupertino_icons: ^1.0.5
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.2
+  bloc: ^8.1.1
+  flutter_secure_storage: ^8.0.0
+  flutter_svg: ^2.0.4
+  form_field_validator: ^1.1.0
+  google_fonts: ^4.0.3
+  http: ^1.1.0
+  image_picker: ^0.8.7+1
+  pin_code_fields: ^7.4.0
+  photo_manager: ^3.0.0-dev.2
+  carousel_slider: ^4.2.1
+  shimmer: ^2.0.0
+  timeago: ^3.4.0
+  cached_network_image: ^3.2.3
+  socket_io_client: ^1.0.2
+  equatable: ^2.0.5
+  url_launcher: ^6.2.2
+  sliding_top_panel: ^0.0.7
+  permission_handler: ^11.1.0
+  fluentui_icons: ^1.0.0
+  flutter_date_pickers: ^0.4.2
+  dropdown_button2: ^2.3.9
+  popover: ^0.2.9
+
+dev_dependencies:
+  icons_launcher: ^2.1.6
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/asset/illustrations/
+    - assets/asset/images/
+    - assets/asset/badges/
+    - assets/asset/fonts/
+    - assets/asset/images/
+    - assets/asset/logos/
+    - assets/asset/certificates/
+    - assets/asset/icons/
+    - assets/svg/
+    - assets/img/
