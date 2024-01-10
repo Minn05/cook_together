@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'user_bloc.dart';
 
 @immutable
@@ -7,14 +8,28 @@ class OnGetUserAuthenticationEvent extends UserEvent {}
 
 class OnRegisterUserEvent extends UserEvent {
   final String fullname;
+  final String username;
   final String email;
   final String password;
   final String birthday;
   final String height;
   final String weight;
+  // final String uidPerson;
+  // final String uidUser;
+  // final String temp;
 
-  OnRegisterUserEvent(this.fullname, this.email, this.password, 
-      this.birthday, this.height, this.weight);
+  OnRegisterUserEvent(
+    this.fullname,
+    this.username,
+    this.email,
+    this.password,
+    this.birthday,
+    this.height,
+    this.weight,
+    // this.uidPerson,
+    // this.uidUser,
+    // this.temp,
+  );
 }
 
 class OnVerifyEmailEvent extends UserEvent {
@@ -38,11 +53,11 @@ class OnUpdatePictureProfile extends UserEvent {
 
 class OnUpdateProfileEvent extends UserEvent {
   final String user;
-  final String description;
   final String fullname;
-  final String phone;
+  final String height;
+  final String weight;
 
-  OnUpdateProfileEvent(this.user, this.description, this.fullname, this.phone);
+  OnUpdateProfileEvent(this.user, this.fullname, this.height, this.weight);
 }
 
 class OnChangePasswordEvent extends UserEvent {

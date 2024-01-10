@@ -38,7 +38,7 @@ class _ProfileAnotherUserPageState extends State<ProfileAnotherUserPage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: FutureBuilder<ResponseUserSearch>(
+          child: FutureBuilder(
             future: userService.getAnotherUserById(widget.idUser),
             builder: (context, snapshot) {
               return !snapshot.hasData
@@ -104,7 +104,7 @@ class _BodyUser extends StatelessWidget {
 }
 
 // class _ListFotosAnotherProfile extends StatelessWidget {
-//   final List<PostsUser> posts;
+//   final List<RecipesUser> posts;
 //   // final int isPrivate;
 //   final int isFriend;
 

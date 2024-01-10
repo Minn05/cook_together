@@ -1,6 +1,45 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     
-    
+   <!-- Permissions Internet -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Permissions Media / Camera-->
+    <!-- <uses-feature android:name="android.hardware.camera" /> -->
+    <!-- <uses-feature android:name="android.hardware.camera.autofocus" /> -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" android:minSdkVersion="30" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission  android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- <uses-permission  android:name="android.permission.INTERNET"  /> -->
+    <!-- <uses-permission  android:name="android.permission.RECORD_AUDIO"  /> -->
+    <!-- <uses-permission  android:name="android.permission.MODIFY_AUDIO_SETTINGS"  /> -->
+    <!-- <uses-permission  android:name="android.permission.ACCESS_NETWORK_STATE"  /> -->
+ 
+    <!-- The Agora SDK requires Bluetooth permissions in case users are using Bluetooth devices.-->
+    <uses-permission  android:name="android.permission.BLUETOOTH"  />
+
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
+
     <application
         android:label="recipes"
         android:name="${applicationName}"

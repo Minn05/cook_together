@@ -178,7 +178,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage>
                               ],
                             ),
                           ),
-                          Column(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(

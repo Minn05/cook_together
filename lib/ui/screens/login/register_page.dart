@@ -18,6 +18,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   late TextEditingController fullNameController;
   late TextEditingController emailController;
+  late TextEditingController usernameController;
+
   late TextEditingController passwordController;
   late TextEditingController ageController;
   late TextEditingController genderController;
@@ -31,6 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
     super.initState();
     fullNameController = TextEditingController();
     emailController = TextEditingController();
+    usernameController = TextEditingController();
     passwordController = TextEditingController();
     ageController = TextEditingController();
     genderController = TextEditingController();
@@ -74,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: ColorsCustom.primary,
-          title: const Text('Đăng ký'),
+          title: const Text('Đăng ký tài khoản mới'),
           centerTitle: true,
           elevation: 0,
           leading: IconButton(
@@ -115,20 +118,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       ],
                     ),
                   ),
-                  const Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        top: 30,
-                        bottom: 10,
-                      ),
-                      child: Text(
-                        'Đăng ký',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 25),
-                      ),
-                    ),
-                  ),
-
                   //Họ và tên
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -140,6 +129,17 @@ class _RegisterPageState extends State<RegisterPage> {
                       validator: fullNameVaidator,
                     ),
                   ),
+                  //username
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: TextFieldCustom(
+                      controller: usernameController,
+                      hintText: 'Tên người dùng',
+                      isPassword: false,
+                      validator: usernameVaidator,
+                    ),
+                  ),
 
                   //Email
                   Padding(
@@ -147,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         horizontal: 20, vertical: 10),
                     child: TextFieldCustom(
                       controller: emailController,
-                      hintText: 'Địa chí email',
+                      hintText: 'Địa chỉ email',
                       isPassword: false,
                       validator: validatedEmail,
                     ),
@@ -159,51 +159,44 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: TextFieldCustom(
                       controller: passwordController,
                       hintText: 'Mật khẩu',
-                      isPassword: false,
+                      isPassword: true,
                       validator: passwordValidator,
                     ),
                   ),
-                  //Age and Gender
+                  //Age
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.42,
-                          child: TextFieldCustom(
-                            controller: ageController,
-                            hintText: 'Ngày sinh',
-                            isPassword: false,
-                            validator: ageVaidator,
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                Icons.calendar_today_outlined,
-                                color: ColorsCustom.primary.withOpacity(0.4),
-                              ),
-                              onPressed: () async {
-                                DateTime? pickTime = await showDatePicker(
-                                    context: context,
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime(2050),
-                                    initialDate: DateTime.now());
-                                if (pickTime != null) {
-                                  setState(() {
-                                    ageController.text =
-                                        DateFormat("dd/MM/yyyy")
-                                            .format(pickTime);
-                                  });
-                                }
-                              },
-                            ),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFieldCustom(
+                        controller: ageController,
+                        hintText: 'Ngày sinh',
+                        isPassword: false,
+                        validator: ageVaidator,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            Icons.calendar_today_outlined,
+                            color: ColorsCustom.primary.withOpacity(0.4),
                           ),
+                          onPressed: () async {
+                            DateTime? pickTime = await showDatePicker(
+                                context: context,
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2050),
+                                initialDate: DateTime.now());
+                            if (pickTime != null) {
+                              setState(() {
+                                ageController.text =
+                                    DateFormat("dd/MM/yyyy").format(pickTime);
+                              });
+                            }
+                          },
                         ),
-                        const SizedBox(width: 10),
-                        // Gender
-                      ],
+                      ),
                     ),
                   ),
+                  const SizedBox(width: 10),
 
                   //Height and Weight
                   Padding(
@@ -249,6 +242,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             userBloc.add(
                               OnRegisterUserEvent(
                                 fullNameController.text.trim(),
+                                usernameController.text.trim(),
                                 emailController.text.trim(),
                                 passwordController.text.trim(),
                                 ageController.text.trim(),

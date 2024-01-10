@@ -3,25 +3,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../data/env/env.dart';
-import '../../../domain/blocs/blocs.dart';
 import '../../../domain/blocs/chat/chat_bloc.dart';
+import '../../../domain/blocs/user/user_bloc.dart';
 import '../../../domain/models/response/response_list_messages.dart';
 import '../../../domain/services/chat_services.dart';
+import '../../themes/button.dart';
 import '../../themes/colors_theme.dart';
 import '../../widgets/widgets.dart';
+import 'videocall/call_screen_rtc.dart';
 import 'widget/chat_widget.dart';
+
 
 class ChatMessagesPage extends StatefulWidget {
   final String uidUserTarget;
   final String usernameTarget;
   final String avatarTarget;
 
-  const ChatMessagesPage(
-      {Key? key,
-      required this.uidUserTarget,
-      required this.usernameTarget,
-      required this.avatarTarget})
-      : super(key: key);
+  ChatMessagesPage({
+    Key? key,
+    required this.uidUserTarget,
+    required this.usernameTarget,
+    required this.avatarTarget,
+  }) : super(key: key);
 
   @override
   State<ChatMessagesPage> createState() => _ChatMessagesPageState();
@@ -32,18 +35,14 @@ class _ChatMessagesPageState extends State<ChatMessagesPage>
   late ChatBloc chatBloc;
   late TextEditingController _messageController;
   final _focusNode = FocusNode();
-
   List<ChatMessage> chatMessage = [];
-
   @override
   void initState() {
     super.initState();
-
     chatBloc = BlocProvider.of<ChatBloc>(context);
 
     chatBloc.initSocketChat();
     _historyMessages();
-
     _messageController = TextEditingController();
   }
 
@@ -54,7 +53,6 @@ class _ChatMessagesPageState extends State<ChatMessagesPage>
     for (ChatMessage message in chatMessage) {
       message.animationController.dispose();
     }
-
     chatBloc.disconnectSocket();
     chatBloc.disconnectSocketMessagePersonal();
     super.dispose();
@@ -78,7 +76,7 @@ class _ChatMessagesPageState extends State<ChatMessagesPage>
   _handleSubmit(String text) {
     _messageController.clear();
     _focusNode.requestFocus();
-    final userBloc = BlocProvider.of<UserBloc>(context).state;
+    var userBloc = BlocProvider.of<UserBloc>(context).state;
 
     if (userBloc.user != null) {
       final chat = ChatMessage(
@@ -102,6 +100,7 @@ class _ChatMessagesPageState extends State<ChatMessagesPage>
 
   @override
   Widget build(BuildContext context) {
+    var dataCall = BlocProvider.of<UserBloc>(context).state;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -128,6 +127,18 @@ class _ChatMessagesPageState extends State<ChatMessagesPage>
             icon: const Icon(Icons.arrow_back_ios_new_rounded,
                 color: Colors.black87)),
         actions: [
+          Button(
+            height: 40,
+            width: 40,
+            // bg: ColorTheme.bgGrey,
+            icon: const Icon(Icons.video_call_outlined,
+                color: Colors.blueAccent),
+            onPress: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return CallScreenRTC(callerId: dataCall.user!.uid,receiverId: widget.uidUserTarget,);
+              },));
+            }, bg: Colors.grey,
+          ),
           CircleAvatar(
             backgroundImage:
                 NetworkImage(Environment.baseUrl + widget.avatarTarget),
@@ -144,7 +155,8 @@ class _ChatMessagesPageState extends State<ChatMessagesPage>
                   uidUser: state.uidSource!,
                   message: state.message!,
                   animationController: AnimationController(
-                      vsync: this, duration: const Duration(milliseconds: 350)),
+                      vsync: this,
+                      duration: const Duration(milliseconds: 350)),
                 );
 
                 chatMessage.insert(0, chatListen);
@@ -162,7 +174,7 @@ class _ChatMessagesPageState extends State<ChatMessagesPage>
             height: 1,
             color: Colors.grey[200],
           ),
-          _textMessage()
+          _textMessage(),
         ],
       ),
     );

@@ -18,8 +18,8 @@ final ageVaidator = MultiValidator([
   RequiredValidator(errorText: 'Vui lòng nhập tuổi'),
 ]);
 
-final genderVaidator = MultiValidator([
-  RequiredValidator(errorText: 'Vui lòng nhập giới tính'),
+final usernameVaidator = MultiValidator([
+  RequiredValidator(errorText: 'Vui lòng nhập tền người dùng'),
 ]);
 
 final heightVaidator = MultiValidator([

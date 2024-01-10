@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -16,10 +18,10 @@ class AccountProfilePage extends StatefulWidget {
 
 class _AccountProfilePageState extends State<AccountProfilePage> {
   late TextEditingController _userController;
-  late TextEditingController _descriptionController;
   late TextEditingController _emailController;
   late TextEditingController _fullNameController;
-  late TextEditingController _phoneController;
+  late TextEditingController _heightController;
+  late TextEditingController _weightController;
   final _keyForm = GlobalKey<FormState>();
 
   @override
@@ -28,21 +30,22 @@ class _AccountProfilePageState extends State<AccountProfilePage> {
 
     final userBloc = BlocProvider.of<UserBloc>(context).state;
 
-    _userController = TextEditingController(text: userBloc.user!.username);
-    _descriptionController =
-        TextEditingController(text: userBloc.user!.description);
-    _emailController = TextEditingController(text: userBloc.user!.email);
-    _fullNameController = TextEditingController(text: userBloc.user!.fullname);
-    _phoneController = TextEditingController(text: userBloc.user!.phone);
+    _userController = TextEditingController(text: userBloc.user?.username);
+    _emailController = TextEditingController(text: userBloc.user?.email);
+    _fullNameController = TextEditingController(text: userBloc.user?.fullname);
+    _heightController =
+        TextEditingController(text: userBloc.user?.height.toString());
+    _weightController =
+        TextEditingController(text: userBloc.user?.weight.toString());
   }
 
   @override
   void dispose() {
     _userController.dispose();
-    _descriptionController.dispose();
     _emailController.dispose();
     _fullNameController.dispose();
-    _phoneController.dispose();
+    _heightController.dispose();
+    _weightController.dispose();
     super.dispose();
   }
 
@@ -83,9 +86,9 @@ class _AccountProfilePageState extends State<AccountProfilePage> {
                   if (_keyForm.currentState!.validate()) {
                     userBloc.add(OnUpdateProfileEvent(
                         _userController.text.trim(),
-                        _descriptionController.text.trim(),
                         _fullNameController.text.trim(),
-                        _phoneController.text.trim()));
+                        _weightController.text.trim(),
+                        _heightController.text.trim()));
                   }
                 },
                 child: const TextCustom(
@@ -103,20 +106,9 @@ class _AccountProfilePageState extends State<AccountProfilePage> {
                 const SizedBox(height: 20.0),
                 TextFormProfile(
                     controller: _userController,
-                    labelText: 'Người dùng',
+                    labelText: 'Tên người dùng',
                     validator: MultiValidator([])),
                 const SizedBox(height: 10.0),
-                TextFormProfile(
-                    controller: _descriptionController,
-                    labelText: 'Miêu tả',
-                    maxLines: 3),
-                const SizedBox(height: 20.0),
-                TextFormProfile(
-                  controller: _emailController,
-                  isReadOnly: true,
-                  labelText: 'Email',
-                ),
-                const SizedBox(height: 20.0),
                 TextFormProfile(
                     controller: _fullNameController,
                     labelText: 'Fullname',
@@ -124,12 +116,22 @@ class _AccountProfilePageState extends State<AccountProfilePage> {
                       RequiredValidator(errorText: 'Vui lòng nhập họ và tên'),
                       MinLengthValidator(3, errorText: 'Ít nhất 5 ký tự')
                     ])),
+                // const SizedBox(height: 20.0),
+                // TextFormProfile(
+                //   controller: _emailController,
+                //   isReadOnly: true,
+                //   labelText: 'Email',
+                // ),
                 const SizedBox(height: 20.0),
                 TextFormProfile(
-                  controller: _phoneController,
-                  labelText: 'Số điện thoại',
-                  keyboardType: TextInputType.number,
-                ),
+                    controller: _heightController,
+                    labelText: 'Chiều cao của bạn',
+                    validator: MultiValidator([])),
+                const SizedBox(height: 20.0),
+                TextFormProfile(
+                    controller: _weightController,
+                    labelText: 'Cân nặng của bạn',
+                    validator: MultiValidator([])),
               ],
             ),
           ),

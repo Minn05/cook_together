@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:http/http.dart' as http;
 import 'package:recipes/data/env/env.dart';
 import 'package:recipes/data/storage/secure_storage.dart';
@@ -38,13 +39,21 @@ class UserServices {
     // _streamPostController.close();
   }
 
-  Future<DefaultResponse> createdUser(String fullname, String email,
-      String password, String birthday, String height, String weight) async {
+  Future<DefaultResponse> createdUser(
+    String fullname,
+    String username,
+    String email,
+    String password,
+    String birthday,
+    String height,
+    String weight,
+  ) async {
     final resp =
         await http.post(Uri.parse('${Environment.urlApi}/user'), headers: {
       'Accept': 'application/json'
     }, body: {
       'fullname': fullname,
+      'username': username,
       'email': email,
       'password': password,
       'birthday': birthday,
@@ -113,7 +122,7 @@ class UserServices {
   }
 
   Future<DefaultResponse> updateProfile(
-      String user, String description, String fullname, String phone) async {
+      String user, String fullname, String weight, String height) async {
     final token = await secureStorage.readToken();
 
     final resp = await http.put(
@@ -124,9 +133,9 @@ class UserServices {
         },
         body: {
           'user': user,
-          'description': description,
           'fullname': fullname,
-          'phone': phone
+          'height': height,
+          'weight': weight
         });
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));
@@ -201,7 +210,7 @@ class UserServices {
   Future<ResponseUserSearch> getAnotherUserById(String idUser) async {
     final token = await secureStorage.readToken();
 
-    final resp = await http.  get(
+    final resp = await http.get(
         Uri.parse(
             '${Environment.urlApi}/user/get-another-user-by-id/' + idUser),
         headers: {'Accept': 'application/json', 'xxx-token': token!});

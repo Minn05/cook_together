@@ -82,7 +82,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                               children: [
                                 CircleAvatar(
                                   radius: 22,
-                                  backgroundColor: Colors.blue,
+                                  // backgroundColor: Colors.blue,
                                   backgroundImage: NetworkImage(
                                       Environment.baseUrl +
                                           snapshot.data![i].avatar),
@@ -109,16 +109,16 @@ class _NotificationsPageState extends State<NotificationsPage> {
                                     ),
                                     const SizedBox(width: 5.0),
                                     if (snapshot.data![i].typeNotification ==
-                                        '1')
+                                        'add_fr')
                                       const TextCustom(
                                           text: 'Lời mời kết bạn',
                                           fontSize: 16),
                                     if (snapshot.data![i].typeNotification ==
-                                        '3')
+                                        'join')
                                       const TextCustom(
                                           text: 'Đã theo dõi', fontSize: 16),
                                     if (snapshot.data![i].typeNotification ==
-                                        '2')
+                                        'comment')
                                       const Row(
                                         children: [
                                           TextCustom(
@@ -134,7 +134,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                                 ),
                               ],
                             ),
-                            if (snapshot.data![i].typeNotification == '1')
+                            if (snapshot.data![i].typeNotification == 'like')
                               Card(
                                 color: ColorsCustom.primary,
                                 shape: RoundedRectangleBorder(

@@ -5,9 +5,6 @@ class ResponseProfile {
   final ProfileDetail profile;
   final List<RecipeCreated> recipecreated;
   final List<RecipeSaved> recipeSaved;
-  // final List<TripProfile> tripsProfile;
-  // final List<TripImage> tripsImage;
-  // final List<PostImage> postsImage;
 
   ResponseProfile({
     required this.resp,
@@ -15,9 +12,7 @@ class ResponseProfile {
     required this.profile,
     required this.recipecreated,
     required this.recipeSaved,
-    // required this.tripsProfile,
-    // required this.tripsImage,
-    // required this.postsImage
+
   });
 
   factory ResponseProfile.fromJson(Map<String, dynamic> json) =>
@@ -29,55 +24,10 @@ class ResponseProfile {
             json["recipes"].map((x) => RecipeCreated.fromJson(x))),
         recipeSaved: List<RecipeSaved>.from(
             json["recipeSaved"].map((x) => RecipeSaved.fromJson(x))),
-        // tripsImage: List<TripImage>.from(
-        //     json["tripsImage"].map((x) => TripImage.fromJson(x))),
-        // postsImage: List<PostImage>.from(
-        //     json["postsImage"].map((x) => PostImage.fromJson(x))),
+       
       );
 }
 
-class PostImage {
-  //  images_post.uid as postuid, images_post.image postImage
-  final String postUid;
-  final String postImage;
-
-  PostImage({required this.postUid, required this.postImage});
-  factory PostImage.fromJson(Map<String, dynamic> json) =>
-      PostImage(postUid: json['postuid'], postImage: json['postImage']);
-}
-
-class TripImage {
-  // trip_images.uid as tripuid,trip_images.trip_image_url as tripImage
-  final String tripUid;
-  final String tripImage;
-
-  TripImage({required this.tripUid, required this.tripImage});
-  factory TripImage.fromJson(Map<String, dynamic> json) =>
-      TripImage(tripUid: json['tripuid'], tripImage: json['tripImage']);
-}
-
-class TripProfile {
-  // trips.uid as tripuid, ROUND(AVG(trip_members.trip_rate), 2) as avgRate, COUNT(trip_members.person_uid) as memberJoined, COUNT(trip_members.trip_comment) as totalComment
-  final String tripUid;
-  final String title;
-  final double avgRate;
-  final int memberJoined;
-  final int totalComment;
-
-  TripProfile(
-      {required this.tripUid,
-      required this.avgRate,
-      required this.title,
-      required this.memberJoined,
-      required this.totalComment});
-
-  factory TripProfile.fromJson(Map<String, dynamic> json) => TripProfile(
-      tripUid: json['tripuid'],
-      title: json['trip_title'],
-      avgRate: json['avgRate'] == 0 ? 0.toDouble() : json['avgRate'] + 0.0,
-      memberJoined: json['memberJoined'],
-      totalComment: json['totalComment']);
-}
 
 class ProfileDetail {
   final String fullname;
@@ -112,7 +62,7 @@ class ProfileDetail {
       fullname: json['fullname'] ?? "",
       avatar: json['avatar'] ?? "",
       email: json['email'] ?? "",
-      birthday: DateTime.parse(json["birthday"]),
+      birthday: DateTime.parse(json["birthday"]) ,
       height: json['height'] + 0.0 ?? 0.0,
       weight: json['weight'] + 0.0 ?? 0.0,
       countTripCreated: json['countTripCreated'] ?? 0,

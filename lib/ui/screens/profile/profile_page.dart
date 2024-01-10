@@ -205,6 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ],
                           ),
                         ),
+                        //height,weight,bmi
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 20),
@@ -256,7 +257,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
                                     ),
                                   ),
-                                ],
+                                ]
                               ),
                               Column(
                                 children: [
@@ -390,7 +391,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   );
           }),
-      // bottomNavigationBar: const BottomNavigation(index: 6),
     );
   }
 }

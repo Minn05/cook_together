@@ -100,7 +100,7 @@ class _ListFollowers extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 25,
-                        backgroundColor: Colors.amber,
+                        // backgroundColor: Colors.amber,
                         backgroundImage: NetworkImage(
                             Environment.baseUrl + follow[i].avatar),
                       ),

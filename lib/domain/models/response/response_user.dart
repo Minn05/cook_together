@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:recipes/domain/models/response/response_recipe.dart';
-
 ResponseUser responseUserFromJson(String str) =>
     ResponseUser.fromJson(json.decode(str));
 
@@ -61,14 +59,14 @@ class RecipesUser {
 
 class User {
   String uid;
+  String username;
   String fullname;
-  String phone;
   String image;
   String cover;
   DateTime birthdayDate;
+  String height;
+  String weight;
   DateTime createdAt;
-  String username;
-  String description;
   int isPrivate;
   int isOnline;
   String email;
@@ -76,13 +74,13 @@ class User {
   User({
     required this.uid,
     required this.fullname,
-    required this.phone,
     required this.image,
     required this.cover,
     required this.birthdayDate,
+    required this.height,
+    required this.weight,
     required this.createdAt,
     required this.username,
-    required this.description,
     required this.isPrivate,
     required this.isOnline,
     required this.email,
@@ -91,14 +89,13 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => User(
         uid: json["uid"] ?? '',
         fullname: json["fullname"] ?? '',
-        phone: json["phone"] ?? '',
         image: json["image"] ?? '',
         cover: json["cover"] ?? '',
-        birthdayDate:
-            DateTime.parse(json["birthday"] ?? '2021-10-22T20:17:53'),
+        birthdayDate: DateTime.parse(json["birthday"] ?? '2021-10-22T20:17:53'),
         createdAt: DateTime.parse(json["created_at"] ?? '2021-10-22T20:17:53'),
-        username: json["username"] ?? '',
-        description: json["description"] ?? '',
+        username: json["user"] ?? '',
+        height: json["height"] ?? "",
+        weight: json["weight"] ?? "",
         isPrivate: json["is_private"] ?? -0,
         isOnline: json["is_online"] ?? -0,
         email: json["email"] ?? '',
@@ -107,13 +104,13 @@ class User {
   Map<String, dynamic> toJson() => {
         "uid": uid,
         "fullname": fullname,
-        "phone": phone,
         "image": image,
         "cover": cover,
         "birthday_date": birthdayDate,
         "created_at": createdAt.toIso8601String(),
-        "username": username,
-        "description": description,
+        "user": username,
+        "height": height,
+        "weight": weight,
         "is_private": isPrivate,
         "is_online": isOnline,
         "email": email,

@@ -20,7 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(),
+        decoration: const BoxDecoration(),
         child: BottomNavigationBar(
           selectedItemColor: Colors.redAccent,
           unselectedItemColor: Colors.black.withOpacity(0.5),

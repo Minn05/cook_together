@@ -31,7 +31,7 @@ class ResponseUserSearch {
           anotherUser: AnotherUser.fromJson(json["anotherUser"]),
           analytics: Analytics.fromJson(json["analytics"]),
           recipesUser: List<RecipesUser>.from(
-              json["recipes"].map((x) => RecipesUser.fromJson(x))),
+              json["recipesUser"].map((x) => RecipesUser.fromJson(x))),
           isFriend: json["is_friend"] ?? 0,
           isPendingFollowers: json["is_pending_follower"] ?? 0);
 

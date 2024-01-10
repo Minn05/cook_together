@@ -7,6 +7,8 @@ import 'package:recipes/domain/blocs/blocs.dart';
 import 'package:recipes/domain/blocs/post/post_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import 'domain/blocs/call/call_bloc.dart';
+
 void main() {
   timeago.setLocaleMessages('vi', timeago.ViMessages());
   runApp(const MyApp());
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => PostBloc()),
         BlocProvider(create: (_) => RecipeBloc()),
         BlocProvider(create: (_) => ChatBloc()),
+        BlocProvider(create: (_) => CallBloc()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

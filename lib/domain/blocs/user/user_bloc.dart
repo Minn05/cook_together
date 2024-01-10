@@ -44,11 +44,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
       final resp = await userService.createdUser(
           event.fullname,
+          event.username,
           event.email,
           event.password,
           event.birthday,
           event.height,
-          event.weight);
+          event.weight,
+          // event.uidPerson,
+          // event.uidUser,
+          // event.temp
+          );
 
       if (resp.resp) {
         emit(SuccessUserState());
@@ -93,8 +98,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
         emit(SuccessUserState());
 
-        emit(
-            state.copyWith(user: dataUser.user, recipesUser: dataUser.recipesUser));
+        emit(state.copyWith(
+            user: dataUser.user, recipesUser: dataUser.recipesUser));
       } else {
         emit(FailureUserState(data.message));
       }
@@ -117,8 +122,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
         emit(SuccessUserState());
 
-        emit(
-            state.copyWith(user: dataUser.user, recipesUser: dataUser.recipesUser));
+        emit(state.copyWith(
+            user: dataUser.user, recipesUser: dataUser.recipesUser));
       } else {
         emit(FailureUserState(data.message));
       }
@@ -133,15 +138,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(LoadingEditUserState());
 
       final data = await userService.updateProfile(
-          event.user, event.description, event.fullname, event.phone);
+          event.user, event.fullname, event.height, event.weight);
 
       if (data.resp) {
         final dataUser = await userService.getUserById();
 
         emit(SuccessUserState());
 
-        emit(
-            state.copyWith(user: dataUser.user, recipesUser: dataUser.recipesUser));
+        emit(state.copyWith(
+            user: dataUser.user, recipesUser: dataUser.recipesUser));
       } else {
         emit(FailureUserState(data.message));
       }
@@ -165,13 +170,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       if (data.resp) {
         emit(SuccessUserState());
 
-        emit(
-            state.copyWith(user: dataUser.user, recipesUser: dataUser.recipesUser));
+        emit(state.copyWith(
+            user: dataUser.user, recipesUser: dataUser.recipesUser));
       } else {
         emit(FailureUserState(data.message));
 
-        emit(
-            state.copyWith(user: dataUser.user, recipesUser: dataUser.recipesUser));
+        emit(state.copyWith(
+            user: dataUser.user, recipesUser: dataUser.recipesUser));
       }
     } catch (e) {
       emit(FailureUserState(e.toString()));

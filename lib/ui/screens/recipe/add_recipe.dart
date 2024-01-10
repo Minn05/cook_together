@@ -1,13 +1,15 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:recipes/constants.dart';
 import 'package:recipes/domain/blocs/blocs.dart';
 import 'package:recipes/ui/helpers/helpers.dart';
 import 'package:recipes/ui/themes/colors_theme.dart';
 import 'package:recipes/ui/widgets/widgets.dart';
+
+import '../../themes/title_appbar.dart';
 
 class AddRecipePage extends StatefulWidget {
   const AddRecipePage({Key? key}) : super(key: key);
@@ -121,6 +123,12 @@ class _AddRecipePageState extends State<AddRecipePage> {
         }
       },
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: const TitleAppbar(
+            title: "Thêm công thức mới",
+          ),
+        ),
         backgroundColor: Colors.white,
         body: SafeArea(
             child: Form(
@@ -128,8 +136,6 @@ class _AddRecipePageState extends State<AddRecipePage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                _appBarRecipe(),
-
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -332,7 +338,6 @@ class _AddRecipePageState extends State<AddRecipePage> {
                                             return null;
                                           },
                                           decoration: InputDecoration(
-                                            
                                             hintText: ('Nguyên liệu'),
                                             border: OutlineInputBorder(
                                               borderRadius:
@@ -379,15 +384,19 @@ class _AddRecipePageState extends State<AddRecipePage> {
                               },
                               icon: const Icon(
                                 Icons.add,
-                                color: Colors.white,
+                                color: kPrimaryLabelColor,
                               ),
-                              label: const Text(
-                                'Thêm',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
+                              label: Text('Thêm', style: kHeadlineLabelStyle),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.white,
+                                ),
+                                side: MaterialStateProperty.all(
+                                  const BorderSide(
+                                      color: ColorsCustom.primary, width: 2),
+                                ),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: ColorsCustom.primary),
                             ),
                           ),
                         ],
@@ -502,15 +511,19 @@ class _AddRecipePageState extends State<AddRecipePage> {
                               },
                               icon: const Icon(
                                 Icons.add,
-                                color: Colors.white,
+                                color: kPrimaryLabelColor,
                               ),
-                              label: const Text(
-                                'Thêm',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
+                              label: Text('Thêm', style: kHeadlineLabelStyle),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.white,
+                                ),
+                                side: MaterialStateProperty.all(
+                                  const BorderSide(
+                                      color: ColorsCustom.primary, width: 2),
+                                ),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: ColorsCustom.primary),
                             ),
                           ),
                         ],
@@ -518,7 +531,13 @@ class _AddRecipePageState extends State<AddRecipePage> {
                     ),
                   ),
                 ),
-                //hình
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _addRecipe(),
+                  ],
+                ),
               ],
             ),
           ),
@@ -527,7 +546,7 @@ class _AddRecipePageState extends State<AddRecipePage> {
     );
   }
 
-  Widget _appBarRecipe() {
+  Widget _addRecipe() {
     final recipeBloc = BlocProvider.of<RecipeBloc>(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -538,7 +557,7 @@ class _AddRecipePageState extends State<AddRecipePage> {
             buildWhen: (previous, current) => previous != current,
             builder: (context, state) => TextButton(
                 style: TextButton.styleFrom(
-                    padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     backgroundColor: ColorsCustom.primary,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
