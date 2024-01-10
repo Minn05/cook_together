@@ -29,7 +29,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     try {
       final data = await userService.getUserById();
 
-      emit(state.copyWith(user: data.user, postsUser: data.postsUser));
+      emit(state.copyWith(user: data.user, recipesUser: data.recipesUser));
     } catch (e) {
       emit(FailureUserState(e.toString()));
     }
@@ -94,7 +94,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(SuccessUserState());
 
         emit(
-            state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
+            state.copyWith(user: dataUser.user, recipesUser: dataUser.recipesUser));
       } else {
         emit(FailureUserState(data.message));
       }
@@ -118,7 +118,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(SuccessUserState());
 
         emit(
-            state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
+            state.copyWith(user: dataUser.user, recipesUser: dataUser.recipesUser));
       } else {
         emit(FailureUserState(data.message));
       }
@@ -141,7 +141,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(SuccessUserState());
 
         emit(
-            state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
+            state.copyWith(user: dataUser.user, recipesUser: dataUser.recipesUser));
       } else {
         emit(FailureUserState(data.message));
       }
@@ -166,12 +166,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(SuccessUserState());
 
         emit(
-            state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
+            state.copyWith(user: dataUser.user, recipesUser: dataUser.recipesUser));
       } else {
         emit(FailureUserState(data.message));
 
         emit(
-            state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
+            state.copyWith(user: dataUser.user, recipesUser: dataUser.recipesUser));
       }
     } catch (e) {
       emit(FailureUserState(e.toString()));
@@ -197,7 +197,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
         emit(SuccessUserState());
 
-        emit(state.copyWith(user: data.user, postsUser: data.postsUser));
+        emit(state.copyWith(user: data.user, recipesUser: data.recipesUser));
       } else {
         FailureUserState(data.message);
       }
@@ -207,7 +207,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   Future<void> _logOutAuth(OnLogOutUser event, Emitter<UserState> emit) async {
-    emit(state.copyWith(postsUser: null, user: null));
+    emit(state.copyWith(recipesUser: null, user: null));
   }
 
   Future<void> _addNewFollowing(
@@ -222,7 +222,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
         emit(SuccessFollowingUser());
 
-        emit(state.copyWith(user: data.user, postsUser: data.postsUser));
+        emit(state.copyWith(user: data.user, recipesUser: data.recipesUser));
       } else {
         FailureUserState(data.message);
       }
@@ -244,7 +244,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
         emit(SuccessUserState());
 
-        emit(state.copyWith(user: data.user, postsUser: data.postsUser));
+        emit(state.copyWith(user: data.user, recipesUser: data.recipesUser));
       } else {
         FailureUserState(data.message);
       }
@@ -265,7 +265,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
         emit(SuccessFollowingUser());
 
-        emit(state.copyWith(user: data.user, postsUser: data.postsUser));
+        emit(state.copyWith(user: data.user, recipesUser: data.recipesUser));
       } else {
         emit(FailureUserState(data.message));
       }
@@ -286,7 +286,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
         emit(SuccessFollowersUser());
 
-        emit(state.copyWith(user: data.user, postsUser: data.postsUser));
+        emit(state.copyWith(user: data.user, recipesUser: data.recipesUser));
       } else {
         emit(FailureUserState(data.message));
       }

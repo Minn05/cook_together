@@ -4,10 +4,13 @@ import 'package:recipes/data/env/env.dart';
 import 'package:recipes/domain/models/response/response_profile.dart';
 import 'package:recipes/domain/services/user_services.dart';
 import 'package:recipes/ui/screens/home/recipe_detail.dart';
+import 'package:recipes/ui/screens/profile/following_page.dart';
 import 'package:recipes/ui/screens/profile/setting_profile_page.dart';
 
 import 'package:recipes/ui/themes/colors_theme.dart';
 import 'package:recipes/ui/themes/title_appbar.dart';
+
+import 'followers_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -123,7 +126,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                   vertical: 10,
                                 ),
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                FollowersPage()));
+                                  },
                                   child: Container(
                                     height: 60,
                                     width: MediaQuery.of(context).size.width *
@@ -158,7 +167,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                   vertical: 10,
                                 ),
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                FollowingPage()));
+                                  },
                                   child: Container(
                                     height: 60,
                                     width: MediaQuery.of(context).size.width *
@@ -378,80 +393,6 @@ class _ProfilePageState extends State<ProfilePage> {
       // bottomNavigationBar: const BottomNavigation(index: 6),
     );
   }
-
-  // Widget _renderTripCard(TripProfile trip) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(10),
-  //     child: Container(
-  //       width: 200,
-  //       constraints: const BoxConstraints(minHeight: 150),
-  //       margin: const EdgeInsets.only(right: 8),
-  //       decoration: BoxDecoration(
-  //         color: Colors.white,
-  //         boxShadow: const [
-  //           BoxShadow(
-  //               color: Colors.black12, offset: Offset(0, -5), blurRadius: 5),
-  //           BoxShadow(
-  //               color: Colors.black12, offset: Offset(0, 5), blurRadius: 5)
-  //         ],
-  //         borderRadius: BorderRadius.circular(14),
-  //       ),
-  //       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-  //       child: Column(
-  //         children: [
-  //           Container(
-  //             height: 80,
-  //             width: 200,
-  //             decoration: BoxDecoration(
-  //               // shape: BoxShape.circle,
-  //               borderRadius: BorderRadius.circular(10),
-  //               image: const DecorationImage(
-  //                 fit: BoxFit.fill,
-  //                 image:
-  //                     NetworkImage(Environment.baseUrl + "cover_default.jpg"),
-  //               ),
-  //             ),
-  //           ),
-  //           Container(
-  //             padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-  //             child: Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               children: <Widget>[
-  //                 Text(
-  //                   trip.title,
-  //                   style: TextStyle(
-  //                       overflow: TextOverflow.ellipsis,
-  //                       fontSize: 15,
-  //                       color: Colors.grey[800],
-  //                       fontWeight: FontWeight.w800),
-  //                   maxLines: 2,
-  //                 ),
-  //                 Container(height: 5),
-  //                 Column(
-  //                   crossAxisAlignment: CrossAxisAlignment.end,
-  //                   children: [
-  //                     NumberDetail(
-  //                       value: "${trip.memberJoined}",
-  //                       modifier: "Thành viên",
-  //                     ),
-  //                     NumberDetail(
-  //                       value: "${trip.totalComment}",
-  //                       modifier: "Bình luận",
-  //                     ),
-  //                     NumberDetail(
-  //                       value: "${trip.avgRate}",
-  //                       modifier: "Đánh giá",
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }
 
 class _recipeCreated extends StatelessWidget {

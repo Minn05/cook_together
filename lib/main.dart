@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recipes/domain/blocs/chat/chat_bloc.dart';
 import 'package:recipes/ui/screens/intro/checking_login_page.dart';
 import 'package:recipes/domain/blocs/blocs.dart';
 import 'package:recipes/domain/blocs/post/post_bloc.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => UserBloc()),
         BlocProvider(create: (_) => PostBloc()),
         BlocProvider(create: (_) => RecipeBloc()),
+        BlocProvider(create: (_) => ChatBloc()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

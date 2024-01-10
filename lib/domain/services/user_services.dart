@@ -198,12 +198,10 @@ class UserServices {
     //     .then((_) => timer.cancel());
   }
 
-  
-
   Future<ResponseUserSearch> getAnotherUserById(String idUser) async {
     final token = await secureStorage.readToken();
 
-    final resp = await http.get(
+    final resp = await http.  get(
         Uri.parse(
             '${Environment.urlApi}/user/get-another-user-by-id/' + idUser),
         headers: {'Accept': 'application/json', 'xxx-token': token!});

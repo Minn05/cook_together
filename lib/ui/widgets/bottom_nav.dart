@@ -13,6 +13,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     HomePage(),
     SearchPage(),
     AddRecipePage(),
+    ListMessagesPage(),
     ProfilePage(),
   ];
   @override
@@ -36,6 +37,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
             BottomNavigationBarItem(
               icon: Icon(Icons.add_circle_outline),
               label: "Add",
+            ),
+            BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.facebookMessenger),
+              label: "Messages",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
@@ -87,7 +92,10 @@ class _ItemButtom extends StatelessWidget {
                         ? Colors.white
                         : Colors.black87,
                 size: 28)
-            : SvgPicture.asset(iconString!, height: 25),
+            : SvgPicture.asset(
+                iconString!,
+                height: 25,
+              ),
       ),
     );
   }

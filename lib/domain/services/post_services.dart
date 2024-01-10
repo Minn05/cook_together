@@ -144,7 +144,7 @@ class PostServices {
     final token = await secureStorage.readToken();
 
     final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/post/get-all-post-by-user-id'),
+        Uri.parse('${Environment.urlApi}/post//recipe/get-all-recipes'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
 
     return ResponsePostByUser.fromJson(jsonDecode(resp.body)).postUser;

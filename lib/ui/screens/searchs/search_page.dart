@@ -8,6 +8,7 @@ import 'package:recipes/domain/services/post_services.dart';
 import 'package:recipes/domain/services/user_services.dart';
 import 'package:recipes/ui/helpers/helpers.dart';
 import 'package:recipes/domain/models/response/response_search.dart';
+import 'package:recipes/ui/screens/home/recipe_detail.dart';
 import 'package:recipes/ui/screens/profile/profile_another_user_page.dart';
 import 'package:recipes/ui/widgets/widgets.dart';
 
@@ -102,7 +103,7 @@ class _SearchPageState extends State<SearchPage> {
         if (snapshot.data == null) return Container();
 
         if (!snapshot.hasData)
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator());
 
         if (snapshot.data!.isEmpty) {
           return ListTile(
@@ -141,7 +142,7 @@ class _ListUsers extends StatelessWidget {
             //       routeSlide(
             //           page: ProfileAnotherUserPage(idUser: listUser[i].uid)));
             // }
-            // if (listUser[i].uid == 0) {
+            // if (listUser[i].uid == 1) {
             //   Navigator.push(
             //       context,
             //       routeSlide(
@@ -189,8 +190,8 @@ class _ListUsers extends StatelessWidget {
                         text: listUser[i].fullname,
                         // color: Colors.red,
                       ),
-                      TextCustom(
-                          text: "${listUser[i].uid}", color: Colors.grey),
+                      // TextCustom(
+                      //     text: "${listUser[i].username}", color: Colors.grey),
                     ],
                   )
                 ],

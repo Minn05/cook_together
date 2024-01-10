@@ -8,6 +8,8 @@ import 'package:recipes/ui/helpers/helpers.dart';
 import 'package:recipes/ui/themes/colors_theme.dart';
 import 'package:recipes/ui/widgets/widgets.dart';
 
+import '../messages/chat_message_page.dart';
+
 class ProfileAnotherUserPage extends StatefulWidget {
   final String idUser;
 
@@ -71,8 +73,8 @@ class _BodyUser extends StatelessWidget {
           isFriend: responseUserSearch.isFriend,
           uidUser: responseUserSearch.anotherUser.uid,
           isPendingFollowers: responseUserSearch.isPendingFollowers,
-          // username: responseUserSearch.anotherUser.username,
-          avatar: responseUserSearch.anotherUser.image,
+          username: responseUserSearch.anotherUser.fullname,
+          avatar: responseUserSearch.anotherUser.avatar,
         ),
         const SizedBox(height: 20.0),
         Container(
@@ -173,7 +175,7 @@ class _BtnFollowAndMessage extends StatelessWidget {
   final int isFriend;
   final int isPendingFollowers;
   final String uidUser;
-  // final String username;
+  final String username;
   final String avatar;
 
   const _BtnFollowAndMessage(
@@ -181,7 +183,7 @@ class _BtnFollowAndMessage extends StatelessWidget {
       required this.isFriend,
       required this.uidUser,
       required this.isPendingFollowers,
-      // required this.username,
+      required this.username,
       required this.avatar})
       : super(key: key);
 
@@ -194,62 +196,70 @@ class _BtnFollowAndMessage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Container(
-            height: 43,
-            width: size.width * .5,
-            decoration: BoxDecoration(
-                color: isFriend == 1 || isPendingFollowers == 1
-                    ? Colors.white
-                    : ColorsCustom.primary,
-                border: Border.all(
-                    color: isFriend == 1 || isPendingFollowers == 1
-                        ? ColorsCustom.primary
-                        : Colors.white),
-                borderRadius: BorderRadius.circular(50.0)),
-            child: isPendingFollowers == 0
-                ? TextButton(
-                    style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0))),
-                    child: TextCustom(
-                        text: isFriend == 1 ? 'Huỷ kết bạn' : 'Kết bạn',
-                        fontSize: 20,
-                        color: isFriend == 1 ? Colors.black : Colors.white),
-                    onPressed: () {
-                      if (isFriend == 1) {
-                        userBloc.add(OnDeletefollowingEvent(uidUser));
-                      } else {
-                        userBloc.add(OnAddNewFollowingEvent(uidUser));
-                      }
-                    },
-                  )
-                : TextButton(
-                    style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0))),
-                    child: const TextCustom(
-                        text: 'Pendiente', fontSize: 20, color: Colors.black),
-                    onPressed: () {},
-                  )),
-        // Container(
-        //   height: 43,
-        //   width: size.width * .4,
-        //   decoration: BoxDecoration(
-        //       border: Border.all(color: Colors.grey),
-        //       borderRadius: BorderRadius.circular(50.0)),
-        //   child: TextButton(
-        //     style: TextButton.styleFrom(
-        //         shape: RoundedRectangleBorder(
-        //             borderRadius: BorderRadius.circular(50.0))),
-        //     child: const TextCustom(text: 'Nhắn tin', fontSize: 20),
-        //     onPressed: () => Navigator.push(
-        //         context,
-        //         routeFade(
-        //             page: ChatMessagesPage(
-        //                 uidUserTarget: uidUser,
-        //                 usernameTarget: username,
-        //                 avatarTarget: avatar))),
-        //   ),
-        // )
+          height: 43,
+          width: size.width * .5,
+          decoration: BoxDecoration(
+              color: isFriend == 1 || isPendingFollowers == 1
+                  ? Colors.white
+                  : ColorsCustom.primary,
+              border: Border.all(
+                  color: isFriend == 1 || isPendingFollowers == 1
+                      ? ColorsCustom.primary
+                      : Colors.white),
+              borderRadius: BorderRadius.circular(50.0)),
+          child: isPendingFollowers == 0
+              ? TextButton(
+                  style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0))),
+                  child: TextCustom(
+                      text: isFriend == 1 ? 'Huỷ kết bạn' : 'Kết bạn',
+                      fontSize: 20,
+                      color: isFriend == 1 ? Colors.black : Colors.white),
+                  onPressed: () {
+                    if (isFriend == 1) {
+                      userBloc.add(OnDeletefollowingEvent(uidUser));
+                    } else {
+                      userBloc.add(OnAddNewFollowingEvent(uidUser));
+                    }
+                  },
+                )
+              : TextButton(
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                  ),
+                  child: const TextCustom(
+                      text: 'Pendiente', fontSize: 20, color: Colors.black),
+                  onPressed: () {},
+                ),
+        ),
+        Container(
+          height: 43,
+          width: size.width * .4,
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: ColorsCustom.primary,
+              ),
+              borderRadius: BorderRadius.circular(50.0)),
+          child: TextButton(
+            style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0))),
+            child: const TextCustom(text: 'Nhắn tin', fontSize: 20),
+            onPressed: () => Navigator.push(
+              context,
+              routeFade(
+                page: ChatMessagesPage(
+                  uidUserTarget: uidUser,
+                  usernameTarget: username,
+                  avatarTarget: avatar,
+                ),
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
@@ -351,10 +361,10 @@ class _CoverAndProfile extends StatelessWidget {
           SizedBox(
               height: 170,
               width: size.width,
-              child: user.cover != ''
+              child: user.imagebg != ''
                   ? Image(
                       fit: BoxFit.cover,
-                      image: NetworkImage(Environment.baseUrl + user.cover))
+                      image: NetworkImage(Environment.baseUrl + user.imagebg))
                   : Container(
                       height: 170,
                       width: size.width,
@@ -384,7 +394,7 @@ class _CoverAndProfile extends StatelessWidget {
                     color: Colors.green, shape: BoxShape.circle),
                 child: CircleAvatar(
                     backgroundImage:
-                        NetworkImage(Environment.baseUrl + user.image)),
+                        NetworkImage(Environment.baseUrl + user.avatar)),
               ),
             ),
           ),

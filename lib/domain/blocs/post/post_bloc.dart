@@ -128,7 +128,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       emit(LoadingPost());
 
       final data =
-          await postService.addNewComment(event.uidPost, event.comment);
+          await recipeService.addNewComment(event.uidRecipe, event.comment);
 
       if (data.resp) {
         emit(SuccessPost());

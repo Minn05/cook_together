@@ -4,17 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:recipes/domain/blocs/post/post_bloc.dart';
 import 'package:recipes/domain/models/response/response_comments.dart';
 import 'package:recipes/domain/services/post_services.dart';
+import 'package:recipes/domain/services/recipe_services.dart';
 import 'package:recipes/ui/helpers/helpers.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:recipes/data/env/env.dart';
 import 'package:recipes/ui/widgets/widgets.dart';
 
 class CommentsPostPage extends StatefulWidget {
-  final String uidPost;
+  final String uiRecipe;
 
   const CommentsPostPage({
     Key? key,
-    required this.uidPost,
+    required this.uiRecipe,
   }) : super(key: key);
 
   @override
@@ -76,7 +77,7 @@ class _CommentsPostPageState extends State<CommentsPostPage> {
         body: Form(
           key: _keyForm,
           child: FutureBuilder<List<Comment>>(
-            future: postService.getCommentsByUidPost(widget.uidPost),
+            future: recipeService.getCommentsByUidRecipe(widget.uiRecipe),
             builder: (context, snapshot) => !snapshot.hasData
                 ? const ShimmerCustom()
                 : Column(
@@ -95,7 +96,7 @@ class _CommentsPostPageState extends State<CommentsPostPage> {
                                 children: [
                                   CircleAvatar(
                                     radius: 25,
-                                    backgroundColor: Colors.blue,
+                                    // backgroundColor: Colors.blue,
                                     backgroundImage: NetworkImage(
                                         Environment.baseUrl +
                                             snapshot.data![i].avatar),
@@ -109,7 +110,7 @@ class _CommentsPostPageState extends State<CommentsPostPage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         TextCustom(
-                                            text: snapshot.data![i].username,
+                                            text: snapshot.data![i].fullname,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500),
                                         Text(snapshot.data![i].comment),
@@ -187,7 +188,7 @@ class _CommentsPostPageState extends State<CommentsPostPage> {
                                   onPressed: () {
                                     if (_keyForm.currentState!.validate()) {
                                       postBloc.add(OnAddNewCommentEvent(
-                                          widget.uidPost,
+                                          widget.uiRecipe,
                                           _commentController.text.trim()));
                                     }
                                   },

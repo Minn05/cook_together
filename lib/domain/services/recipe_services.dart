@@ -236,13 +236,13 @@ class RecipeServices {
   }
 
   Future<DefaultResponse> addNewComment(
-      String uidRecipe, String comment) async {
+      String recipeUid, String comment) async {
     final token = await secureStorage.readToken();
 
     final resp = await http.post(
         Uri.parse('${Environment.urlApi}/recipe/add-new-comment'),
         headers: {'Accept': 'application/json', 'xxx-token': token!},
-        body: {'uidRecipe': uidRecipe, 'comment': comment});
+        body: {'uidRecipe': recipeUid, 'comment': comment});
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }

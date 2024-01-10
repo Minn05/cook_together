@@ -56,10 +56,10 @@ class OnLikeOrUnLikePost extends PostEvent {
 }
 
 class OnAddNewCommentEvent extends PostEvent {
-  final String uidPost;
+  final String uidRecipe;
   final String comment;
 
-  OnAddNewCommentEvent(this.uidPost, this.comment);
+  OnAddNewCommentEvent(this.uidRecipe, this.comment);
 }
 
 class OnLikeOrUnlikeComment extends PostEvent {

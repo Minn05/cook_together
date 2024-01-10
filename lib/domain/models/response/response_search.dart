@@ -71,8 +71,8 @@ class ResponseSearchByKeyWord {
 
   factory ResponseSearchByKeyWord.fromJson(Map<String, dynamic> json) =>
       ResponseSearchByKeyWord(
-        resp: json["resp"],
-        message: json["message"],
+        resp: json["resp"] ?? '',
+        message: json["message"] ?? '',
         user: List<ResponseSearchByKeyWordItem>.from(
             json["user"].map((x) => ResponseSearchByKeyWordItem.fromJson(x))),
       );
@@ -89,6 +89,8 @@ class ResponseSearchByKeyWordItem {
     required this.uid,
     required this.fullname,
     required this.avatar,
+    required this.username,
+
     // required this.title,
     // required this.category,
     // required this.image
@@ -97,6 +99,7 @@ class ResponseSearchByKeyWordItem {
   String uid;
   String fullname;
   String avatar;
+  String username;
   // String title;
   // String category;
   // String image;
@@ -106,7 +109,7 @@ class ResponseSearchByKeyWordItem {
         uid: json["uid"] ?? "",
         fullname: json["fullname"] ?? "",
         avatar: json["avatar"] ?? "",
-        // title: json["title"] ?? "",
+        username: json["username"] ?? "",
         // category: json["category"] ?? "",
         // image: json["image"] ?? "",
       );
@@ -115,7 +118,7 @@ class ResponseSearchByKeyWordItem {
         "uid": uid,
         "fullname": fullname,
         "avatar": avatar,
-        // "title": title,
+        "username": username,
         // "category": category,
         // "image": image,
       };

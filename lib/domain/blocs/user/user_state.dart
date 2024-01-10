@@ -4,21 +4,21 @@ part of 'user_bloc.dart';
 class UserState {
 
   final User? user;
-  final PostsUser? postsUser;
+  final RecipesUser? recipesUser;
   final bool isPhotos;
 
 
   const UserState({
     this.user,
     this.isPhotos = true,
-    this.postsUser
+    this.recipesUser
   });
 
-  UserState copyWith({ User? user, bool? isPhotos, PostsUser? postsUser })
+  UserState copyWith({ User? user, bool? isPhotos, RecipesUser? recipesUser })
     => UserState(
       user: user ?? this.user,
       isPhotos: isPhotos ?? this.isPhotos,
-      postsUser: postsUser ?? this.postsUser
+      recipesUser: recipesUser ?? this.recipesUser
     );
 
 

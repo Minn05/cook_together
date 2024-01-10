@@ -12,7 +12,7 @@ class ResponseUserSearch {
       required this.message,
       required this.anotherUser,
       required this.analytics,
-      required this.postsUser,
+      required this.recipesUser,
       required this.isFriend,
       required this.isPendingFollowers});
 
@@ -20,7 +20,7 @@ class ResponseUserSearch {
   String message;
   AnotherUser anotherUser;
   Analytics analytics;
-  List<PostsUser> postsUser;
+  List<RecipesUser> recipesUser;
   int isFriend;
   int isPendingFollowers;
 
@@ -30,8 +30,8 @@ class ResponseUserSearch {
           message: json["message"],
           anotherUser: AnotherUser.fromJson(json["anotherUser"]),
           analytics: Analytics.fromJson(json["analytics"]),
-          postsUser: List<PostsUser>.from(
-              json["postsUser"].map((x) => PostsUser.fromJson(x))),
+          recipesUser: List<RecipesUser>.from(
+              json["recipes"].map((x) => RecipesUser.fromJson(x))),
           isFriend: json["is_friend"] ?? 0,
           isPendingFollowers: json["is_pending_follower"] ?? 0);
 
@@ -40,7 +40,7 @@ class ResponseUserSearch {
         "message": message,
         "anotherUser": anotherUser.toJson(),
         "analytics": analytics.toJson(),
-        "postsUser": List<dynamic>.from(postsUser.map((x) => x.toJson())),
+        "recipes": List<dynamic>.from(recipesUser.map((x) => x.toJson())),
         "is_friend": isFriend,
         "is_pending_follower": isPendingFollowers
       };
@@ -75,8 +75,8 @@ class AnotherUser {
     required this.uid,
     required this.fullname,
     required this.birthday,
-    required this.image,
-    required this.cover,
+    required this.avatar,
+    required this.imagebg,
     // required this.birthdayDate,
     required this.createdAt,
     // required this.username,
@@ -88,8 +88,8 @@ class AnotherUser {
   String uid;
   String fullname;
   String birthday;
-  String image;
-  String cover;
+  String avatar;
+  String imagebg;
   // dynamic birthdayDate;
   DateTime createdAt;
   // String username;
@@ -101,8 +101,8 @@ class AnotherUser {
         uid: json["uid"] ?? '',
         fullname: json["fullname"] ?? '',
         birthday: json["birthday"] ?? '',
-        image: json["image"] ?? '',
-        cover: json["cover"] ?? '',
+        avatar: json["avatar"] ?? '',
+        imagebg: json["cover"] ?? '',
         // birthdayDate:
         //     DateTime.parse(json["birthday"] ?? '2021-10-22T20:17:53'),
         createdAt: DateTime.parse(json["created_at"] ?? '2021-10-22T20:17:53'),
@@ -116,7 +116,7 @@ class AnotherUser {
         "uid": uid,
         "fullname": fullname,
         "birthday": birthday,
-        "image": image,
+        "avatar": avatar,
         // "cover": cover,
         // "birthday_date": birthdayDate,
         "created_at": createdAt.toIso8601String(),
@@ -127,32 +127,23 @@ class AnotherUser {
       };
 }
 
-class PostsUser {
-  PostsUser(
-      {required this.postUid,
-      required this.isComment,
-      required this.typePrivacy,
-      required this.createdAt,
-      required this.images});
+class RecipesUser {
+  RecipesUser(
+      {required this.recipeUid, required this.createdAt, required this.images});
 
-  String postUid;
-  int isComment;
-  String typePrivacy;
+  String recipeUid;
+
   DateTime createdAt;
   String images;
 
-  factory PostsUser.fromJson(Map<String, dynamic> json) => PostsUser(
-        postUid: json["post_uid"] ?? '',
-        isComment: json["is_comment"] ?? 0,
-        typePrivacy: json["type_privacy"] ?? '',
+  factory RecipesUser.fromJson(Map<String, dynamic> json) => RecipesUser(
+        recipeUid: json["recipe_uid"] ?? '',
         createdAt: DateTime.parse(json["created_at"]),
         images: json["images"],
       );
 
   Map<String, dynamic> toJson() => {
-        "post_uid": postUid,
-        "is_comment": isComment,
-        "type_privacy": typePrivacy,
+        "recipe_uid": recipeUid,
         "created_at": createdAt.toIso8601String(),
         "images": images,
       };

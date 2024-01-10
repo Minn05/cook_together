@@ -28,8 +28,8 @@ void modalLoading(BuildContext context, String text) {
             Row(
               children: [
                 const CircularProgressIndicator(color: ColorsCustom.primary),
-                const SizedBox(width: 15.0),
-                TextCustom(text: text)
+                const SizedBox(width: 10),
+                TextCustom(text: text, overflow: TextOverflow.visible)
               ],
             ),
           ],

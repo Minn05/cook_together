@@ -244,10 +244,13 @@ class _ListViewPosts extends StatelessWidget {
                 const SizedBox(width: 10.0),
                 TextButton(
                   onPressed: () => Navigator.push(context,
-                      routeFade(page: CommentsPostPage(uidPost: recipes.uId))),
+                      routeFade(page: CommentsPostPage(uiRecipe: recipes.uId))),
                   child: Row(
                     children: [
-                      SvgPicture.asset('assets/svg/message-icon.svg'),
+                      SvgPicture.asset(
+                        'assets/svg/message-icon.svg',
+                        color: Colors.black87,
+                      ),
                       const SizedBox(width: 5.0),
                       TextCustom(
                           text: recipes.countComment.toString(),

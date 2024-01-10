@@ -210,7 +210,7 @@ class _ListPhotosProfilePageState extends State<ListPhotosProfilePage> {
                                                           context,
                                                           routeFade(
                                                               page: CommentsPostPage(
-                                                                  uidPost: snapshot
+                                                                  uiRecipe: snapshot
                                                                       .data![i]
                                                                       .postUid)));
                                                     },
